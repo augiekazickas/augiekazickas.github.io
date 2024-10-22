@@ -11,11 +11,14 @@
 	<div id="odometer" class="odometer">3.01</div>
 	<script src="https://augiekazickas.github.io/js/odometer.js"></script>
 	<script>
- const odometer = document.querySelector(".odometer");
+ const subsOdometer = document.querySelector(".subs-odometer");
 
-    const odometer = new odometer({
-      el: odometer,
+    const odometer = new Odometer({
+      el: subsOdometer,
     })
+
+    // odometer.update(10864);
+    subsOdometer.innerHTML = 10684;
   </script>
 </body>
 </html>
