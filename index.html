@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Gallon</title>
+    <link rel="stylesheet" href="odometer-theme-car.css"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <header>Logo</header>
+    <h1>GRID Alternatives brings back</h1>
+    <h2>THE E-GALLON</h2>
+    <h3>Compare the Costs of Driving With Electricity</h3>
+    <div class="container">
+        <div id="Gasoline-Container">
+            <div id="odometerGas" class="odometer">0</div>
+            <h4>regular gasoline</h4>
+        </div>
+        <div id="Electric-Container">
+            <div id="odometerElectric" class="odometer">0</div>
+            <h4>electric E-Gallon</h4>
+        </div>
+    </div>
+    <footer>This is the footer</footer>
+    <script src="odometer.js"></script>
+    <script>
+        const odometerGas = new Odometer({ el: document.getElementById('odometerGas') });
+        const odometerElectric = new Odometer({ el: document.getElementById('odometerElectric') });
+
+        odometerGas.update(1.23);
+        odometerElectric.update(5.67);
+    </script>
+</body>
+</html>
