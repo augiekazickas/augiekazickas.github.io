@@ -9,8 +9,18 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
 </head>
 <body>
-	<div class="odometer">000</div>
+	<div class="odometer">301</div>
 	<script src="https://augiekazickas.github.io/js/odometer.js"></script>
+	<script>
+ const odometer = document.querySelector(".odometer");
+
+    const odometer = new odometer({
+      el: odometer,
+    })
+
+    // odometer.update(10864);
+    odometer.innerHTML = 10684;
+  </script>
 	
 </body>
 </html>
