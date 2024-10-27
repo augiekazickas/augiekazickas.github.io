@@ -1,0 +1,134 @@
+/* Reset default margin and padding */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    min-height: 100vh; /* Full height for vertical centering */
+}
+
+/* Positioning */
+
+header, h1, h2, h3, h4, .odometer {
+    margin: 10px auto; /* Center the elements and add margin */
+    max-width: 90%; /* Limit the width for larger screens */
+}
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap in smaller screens */
+    align-items: center; /* Align items vertically */
+    padding: 20px;
+    max-width: 800px; /* Limit the max width for larger screens */
+    width: 100%; /* Full width for smaller screens */
+    
+}
+
+.container > div {
+    flex: 1 1 200px; /* Allow flex-grow and flex-shrink */
+    max-width: 300px; /* Max width for each item */
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc; /* Add your preferred border style */
+    border-radius: 8px;
+    background-color:; /* Change to your preferred background color */
+    display: flex; /* Make the child divs flex containers */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center child elements horizontally */
+    justify-content: center; /* Center child elements vertically */
+}
+
+#Gasoline-Container, #Electric-Container {
+    padding: 20px; /* Add some padding inside */
+    flex: 1; /* Allow both containers to grow equally */
+    margin: 0 10px; /* Optional: spacing between containers */
+    text-align: center; /* Center text inside the containers */
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #; /* Change to your preferred footer color */
+    width: 70%; /* Make footer full width */
+    position: relative; /* Ensure footer behaves normally in flow */
+    margin-bottom: 10; /* Stick to the bottom */
+    background-color:#f1f0f0;
+    line-height: 1.75em;
+    font-size: .75em;
+}
+
+/* Text Sizing and Color */
+
+h2 {
+    font-size: 4.5rem; /* Adjust this size to match h1 */
+    margin: 10px 0; /* Ensure consistent margin */
+    width: fit-content; /* Make width fit the content */
+    display: block; /* Ensure it behaves like a block element */
+    margin-left: auto; /* Center the element */
+    margin-right: auto; /* Center the element */
+    text-align: center; /* Center text */
+    color:#444;
+    
+}
+    
+
+h4 {
+    font-size: 1.25rem; /* Adjust this size to match h1 */
+    margin: 10px 0; /* Ensure consistent margin */
+    width: fit-content; /* Make width fit the content */
+    display: block; /* Ensure it behaves like a block element */
+    margin-left: auto; /* Center the element */
+    margin-right: auto; /* Center the element */
+
+}
+
+.odometer {
+    font-size: 2rem;
+}
+
+header img
+{
+    max-width: 15%;  /* Image will not exceed the width of its container */
+    height: auto;
+    float: right;
+}
+
+
+/* Fonts */
+
+.roboto-light-grid {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 2rem;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+footer .roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color:#444;
+}
+
+
+
+
+
+
