@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eGallon</title>
+
+    <!-- Odometer -->
+    <link rel="stylesheet" href="odometer-theme-car.css"/>
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+    <header>
+        <img src="gridlogo.png" alt="GRID Logo">
+    </header>
+
+    <h2 class="roboto-light-grid" id="headline">Compare the Costs of Driving with Electricity</h2>
+    <h2 class="roboto-regular">The eGallon</h2>
+
+    <!-- Loading Indicator -->
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container" id="odometerContainer" style="display: none;">
+        <div id="Gasoline-Container">
+            <div id="odometerGas" class="odometer">0.00</div>
+            <h4 class="roboto-light">regular gasoline ($/gallon)</h4>
+        </div>
+        <div id="Electric-Container">
+            <div id="odometerElectric" class="odometer">0.00</div>
+            <h4 class="roboto-light">electric eGallon</h4>
+        </div>
+    </div>
+
+    <label for="location-select">Find out how much it costs to fuel an electric vehicle in your state</label>
+    <select id="location-select">
+        <option value="CA">California</option>
+        <option value="USA">US average</option>
+        <option value="CO">Colorado</option>
+    </select>
+
+    <footer>
+        <ul class="footer-list">
+            <li class="footer-item roboto-regular">
+                <strong>What is an eGallon?</strong> It is the cost of fueling a vehicle with electricity compared to a similar vehicle that runs on gasoline.
+            </li>
+            <li class="footer-item roboto-regular">
+                The eGallon was first conceived by the Department of Energy. Learn more about the eGallon methodology at 
+                <a href="https://www.energy.gov/articles/egallon-methodology" target="_blank">https://www.energy.gov/articles/egallon-methodology</a>.
+            </li>
+            <li class="footer-item roboto-regular">
+                This tool provides an estimate of potential savings, with actual results varying based on several factors. Data is sourced from the U.S. Energy Information Administration and rates change periodically. 
+            </li>
+        </ul>
+    </footer>
+
+    <script src="odometer.js"></script>
+    
+    <script>
+        // Initialize the odometers
+        let odometerGas = new Odometer({ el: document.getElementById('odometerGas') });
+        let odometerElectric = new Odometer({ el: document.getElementById('odometerElectric') });
+
+        const EIA_API_KEY = "ABFJ3GwbpgUCNVDoRZR2V7PXInOhoLjaEqKfbAaA"; 
+        const GASOLINE_EFFICIENCY_MPG = 30; 
+        const EV_EFFICIENCY_KWH_PER_100_MILES = 37; 
+
+        // Function to fetch California gasoline price
+        async function getAverageGasolinePriceCA() {
+            const url = `https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[0]=value&facets[duoarea][]=SCA&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data.response.data[0].value;
+            } catch (error) {
+                console.error("Failed to fetch CA gasoline prices:", error);
+                return null;
+            }
+        }
+
+        // Function to fetch California electricity price
+        async function getAverageElectricityPriceCA() {
+            const url = `https://api.eia.gov/v2/electricity/retail-sales/data/?api_key=${EIA_API_KEY}&frequency=monthly&data[0]=price&facets[sectorid][]=RES&facets[stateid][]=CA&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data.response.data[0].price / 100;
+            } catch (error) {
+                console.error("Failed to fetch CA electricity prices:", error);
+                return null;
+            }
+        }
+
+        // Function to fetch USA gasoline price
+        async function getAverageGasolinePriceUSA() {
+            const url = `https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[0]=value&facets[duoarea][]=NUS&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data.response.data[0].value;
+            } catch (error) {
+                console.error("Failed to fetch USA gasoline prices:", error);
+                return null;
+            }
+        }
+
+        // Function to fetch USA electricity price
+        async function getAverageElectricityPriceUSA() {
+            const url = `https://api.eia.gov/v2/electricity/retail-sales/data/?api_key=${EIA_API_KEY}&frequency=monthly&data[0]=price&facets[sectorid][]=RES&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data.response.data[0].price / 100;
+            } catch (error) {
+                console.error("Failed to fetch USA electricity prices:", error);
+                return null;
+            }
+        }
+
+         // Function to fetch Colorado gasoline price
+        async function getAverageGasolinePriceCO() {
+            const url = `https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[0]=value&facets[duoarea][]=SCO&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data.response.data[0].value;
+            } catch (error) {
+                console.error("Failed to fetch CO gasoline prices:", error);
+                return null;
+            }
+        }
+
+       // Function to fetch Colorado electricity price
+        async function getAverageElectricityPriceCO() {
+            const url = `https://api.eia.gov/v2/electricity/retail-sales/data/?api_key=${EIA_API_KEY}&frequency=monthly&data[0]=price&facets[sectorid][]=RES&facets[stateid][]=CO&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data.response.data[0].price / 100;
+            } catch (error) {
+                console.error("Failed to fetch CO electricity prices:", error);
+                return null;
+            }
+        }
+
+        // Function to calculate eGallon for California
+        async function calculateEGallonCA() {
+            const gasolinePrice = await getAverageGasolinePriceCA();
+            const electricityPrice = await getAverageElectricityPriceCA();
+
+            if (gasolinePrice !== null && electricityPrice !== null) {
+                odometerGas.update(gasolinePrice);
+                const eGallon = (electricityPrice * EV_EFFICIENCY_KWH_PER_100_MILES) / GASOLINE_EFFICIENCY_MPG;
+                odometerElectric.update(eGallon);
+            } else {
+                console.log("Failed to retrieve data for CA eGallon calculation.");
+            }
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('odometerContainer').style.display = 'flex';
+        }
+
+        // Function to calculate eGallon for USA
+        async function calculateEGallonUSA() {
+            const gasolinePrice = await getAverageGasolinePriceUSA();
+            const electricityPrice = await getAverageElectricityPriceUSA();
+
+            if (gasolinePrice !== null && electricityPrice !== null) {
+                odometerGas.update(gasolinePrice);
+                const eGallon = (electricityPrice * EV_EFFICIENCY_KWH_PER_100_MILES) / GASOLINE_EFFICIENCY_MPG;
+                odometerElectric.update(eGallon);
+            } else {
+                console.log("Failed to retrieve data for USA eGallon calculation.");
+            }
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('odometerContainer').style.display = 'flex';
+        }
+
+         // Function to calculate eGallon for Colorado
+        async function calculateEGallonCO() {
+            const gasolinePrice = await getAverageGasolinePriceCO();
+            const electricityPrice = await getAverageElectricityPriceCO();
+
+            if (gasolinePrice !== null && electricityPrice !== null) {
+                odometerGas.update(gasolinePrice);
+                const eGallon = (electricityPrice * EV_EFFICIENCY_KWH_PER_100_MILES) / GASOLINE_EFFICIENCY_MPG;
+                odometerElectric.update(eGallon);
+            } else {
+                console.log("Failed to retrieve data for CO eGallon calculation.");
+            }
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('odometerContainer').style.display = 'flex';
+        }
+
+        // Event listener for location dropdown
+        document.getElementById('location-select').addEventListener('change', function() {
+            const selectedLocation = this.value;
+
+            // Reset odometers to 0.00 to create a spinning effect while fetching new data
+            odometerGas.update(0.00);
+            odometerElectric.update(0.00);
+
+            // Show loading spinner
+            document.getElementById('loading').style.display = 'flex';
+            document.getElementById('odometerContainer').style.display = 'none';
+
+            // Call the relevant calculation function based on the dropdown selection
+            if (selectedLocation === 'CA') {
+                calculateEGallonCA();
+            } else if (selectedLocation === 'USA') {
+                calculateEGallonUSA();
+            } else if (selectedLocation === 'CO') {
+                calculateEGallonCO();
+            } 
+        });
+
+        // Default calculation for California on page load
+        calculateEGallonCA();
+    </script>
+</body>
+</html>
