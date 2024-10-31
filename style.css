@@ -191,26 +191,32 @@ label[for="location-select"] {
 }
 
 
+/* Dropdown Styling */
 #location-select {
-    padding: 10px 15px; /* Adjust padding for better spacing */
-    font-size: 1rem; /* Font size to match text on the page */
-    border: 1px solid #ccc; /* Border to match the overall theme */
-    border-radius: 8px; /* Rounded corners for a modern look */
-    background: linear-gradient(135deg, #f0f0f0 0%, #f3f3f3 100%); /* Subtle silver gradient background */
-    color: #444; /* Text color to match other elements */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition effects */
-    width: 100%; /* Full width to fit the container */
-    max-width: 300px; /* Limit maximum width for larger screens */
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f0f0f0 0%, #f3f3f3 100%);
+    color: #444;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    max-width: 300px;
+    appearance: none; /* Remove default arrow */
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
 }
 
-/* Change border color on focus */
+/* Change arrow color and border on focus */
 #location-select:focus {
-    border-color: #3F8540; /* Highlight border on focus */
-    box-shadow: 0 0 5px rgba(63, 133, 64, 0.5); /* Light shadow on focus */
-    outline: none; /* Remove default outline */
+    border-color: #3F8540;
+    box-shadow: 0 0 5px rgba(63, 133, 64, 0.5);
+    outline: none;
 }
+
 
 
 
