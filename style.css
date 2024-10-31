@@ -1,15 +1,14 @@
 /* Reset default margin and padding */
-body {
+html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
     display: flex;
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
     min-height: 100vh;
-    overflow-x: hidden; /* Prevents horizontal scrolling */
-    width: 100%; /* Ensures the body width is set to 100% */
 }
 
 /* Positioning */
@@ -25,6 +24,7 @@ header, h1, h2, h3, h4, .odometer {
     padding: 20px;
     max-width: 800px; 
     width: 100%; 
+    overflow: hidden; /* Prevent any overflow within the container */
 }
 
 .container > div {
@@ -40,7 +40,6 @@ header, h1, h2, h3, h4, .odometer {
     align-items: center; 
     justify-content: flex-start; /* Align items at the top */
 }
-
 
 #Gasoline-Container, #Electric-Container {
     padding: 20px; 
@@ -70,8 +69,7 @@ footer {
 .footer-item {
     padding: 10px 15px; /* Padding inside each item */
     margin: 10px 0; /* Space between each item */
-    border-radius: 8px;
-    
+    border-radius: 8px;    
 }
 
 footer a {
@@ -86,8 +84,6 @@ footer a:hover {
     color: #2c6132;
     border-bottom-color: transparent;
 }
-
-
 
 /* Text Sizing and Color */
 h2 {
@@ -123,7 +119,7 @@ header img {
     font-size: 2rem;
 }
 
-.roboto-light-grid-typing{
+.roboto-light-grid-typing {
     font-weight: 300;
     font-size: 1.65rem;
     font-family: "Roboto", sans-serif;
@@ -168,18 +164,17 @@ header img {
     100% { transform: rotate(360deg); }
 }
 
-
 /* Adjusting eGallon size for mobile devices */
 @media (max-width: 480px) { /* For devices with a max width of 480px (like iPhone SE) */
     h2.roboto-regular {
         font-size: 3rem; /* Adjust this value as needed for your design */
     }
-      header img {
+    header img {
         max-width: 25%; /* Increase the size for small screens */
     }
 }
 
-
+/* Dropdown Styling */
 label[for="location-select"] {
     font-family: "Roboto", sans-serif; /* Match the font family */
     font-weight: 500; /* Semi-bold for better visibility */
@@ -224,22 +219,14 @@ label[for="location-select"] {
     background-size: contain; /* Ensures the SVG scales correctly */
 }
 
+/* Change border color on focus */
+#location-select:focus {
+    border-color: #3F8540; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(63, 133, 64, 0.5);
+    outline: none;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Ensure we have space for the arrow in the padding */
+#location-select::-ms-expand {
+    display: none; /* Remove default arrow in IE */
+}
