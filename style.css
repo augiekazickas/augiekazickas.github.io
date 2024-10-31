@@ -15,6 +15,7 @@ html, body {
 header, h1, h2, h3, h4, .odometer {
     margin: 10px auto; 
     max-width: 90%; 
+    width: 100%; /* Ensure headers do not exceed the width */
 }
 
 .container {
@@ -31,7 +32,7 @@ header, h1, h2, h3, h4, .odometer {
     flex: 1 1 200px; 
     max-width: 300px; 
     text-align: center;
-    margin: 10px;
+    margin: 10px; /* Reduce margin to prevent overflow */
     padding: 20px;
     border: 1px solid #ccc; 
     border-radius: 8px;
