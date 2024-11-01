@@ -92,7 +92,6 @@
   padding: 0.10em; /* Reduce padding to make the background less wide */
   max-width:130px; /* Optional: set a maximum width to further reduce size */
   margin: 0 auto; /* Center it horizontally */
-  background: linear-gradient(to bottom, #A9A9A9, #808080); /* Black to dark gray gradient */
 }
 .odometer.odometer-auto-theme .odometer-digit, .odometer.odometer-theme-car .odometer-digit {
   -moz-box-shadow: inset 0 0 0.3em rgba(0, 0, 0, 0.8);
@@ -137,5 +136,5 @@
 
 .odometer.odometer-auto-theme .odometer-formatting-mark, 
 .odometer.odometer-theme-car .odometer-formatting-mark {
-    color: #000; /* Change to desired color */
+    color: #fff /* Change to desired color */
 }
