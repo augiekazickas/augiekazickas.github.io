@@ -186,6 +186,16 @@ header img {
         margin: 5px; /* Additional margin reduction on mobile */
         max-width: 100%; /* Allow full width */
     }
+
+    .container {
+        flex-direction: column; /* Stack containers vertically */
+        align-items: center; /* Center align the containers */
+    }
+    #Gasoline-Container, #Electric-Container {
+        width: 90%; /* Set a fixed width that works well on mobile */
+        max-width: 300px; /* Limit max width for readability */
+        margin: 10px 0; /* Add vertical space between the containers */
+    }
 }
 
 /* Dropdown Styling */
