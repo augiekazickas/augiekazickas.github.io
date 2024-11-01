@@ -24,6 +24,7 @@ header, h1, h2, h3, h4, .odometer {
 
 .container {
     display: flex;
+    justify-content: center; /* Centers child elements horizontally */
     flex-wrap: wrap; 
     align-items: flex-start; /* Align items at the top */
     padding: 20px;
@@ -31,6 +32,7 @@ header, h1, h2, h3, h4, .odometer {
     width: 100%; 
     overflow: hidden; /* Prevent any overflow within the container */
 }
+
 
 .container > div {
     flex: 1 1 200px; 
@@ -52,6 +54,8 @@ header, h1, h2, h3, h4, .odometer {
     margin: 0 5px; /* Reduce side margin */
     text-align: center; 
 }
+
+
 
 footer {
     width: 100%;
@@ -196,7 +200,7 @@ label[for="location-select"] {
 .dropdown-container {
     position: relative; /* Allows absolute positioning for the arrow */
     display: inline-block; /* Ensures the dropdown is inline */
-    width: 100%; /* Set this to your desired width */
+    width: 300px;
 }
 
 /* Dropdown Styling */
@@ -239,3 +243,5 @@ label[for="location-select"] {
 #location-select::-ms-expand {
     display: none; /* Remove default arrow in IE */
 }
+
+
