@@ -75,7 +75,7 @@
 
         const EIA_API_KEY = "ABFJ3GwbpgUCNVDoRZR2V7PXInOhoLjaEqKfbAaA"; 
         const GASOLINE_EFFICIENCY_MPG = 30; 
-        const EV_EFFICIENCY_KWH_PER_100_MILES = 37; 
+        const EV_EFFICIENCY_KWH_PER_MILE = .37; 
 
         // Function to fetch California gasoline price
         async function getAverageGasolinePriceCA() {
@@ -105,7 +105,7 @@
 
         // Function to fetch USA gasoline price
         async function getAverageGasolinePriceUSA() {
-            const url = `https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[0]=value&facets[duoarea][]=NUS&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1`;
+            const url = `https://api.eia.gov/v2/petroleum/pri/gnd/data/?api_key=${EIA_API_KEY}&frequency=weekly&data[0]=value&facets[duoarea][]=NUS&facets[product][]=EPMR&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=1`;
             try {
                 const response = await fetch(url);
                 const data = await response.json();
@@ -162,7 +162,7 @@
 
             if (gasolinePrice !== null && electricityPrice !== null) {
                 odometerGas.update(gasolinePrice);
-                const eGallon = (electricityPrice * EV_EFFICIENCY_KWH_PER_100_MILES) / GASOLINE_EFFICIENCY_MPG;
+                const eGallon = electricityPrice * EV_EFFICIENCY_KWH_PER_MILE * GASOLINE_EFFICIENCY_MPG;
                 odometerElectric.update(eGallon);
             } else {
                 console.log("Failed to retrieve data for CA eGallon calculation.");
@@ -178,7 +178,7 @@
 
             if (gasolinePrice !== null && electricityPrice !== null) {
                 odometerGas.update(gasolinePrice);
-                const eGallon = (electricityPrice * EV_EFFICIENCY_KWH_PER_100_MILES) / GASOLINE_EFFICIENCY_MPG;
+                const eGallon = electricityPrice * EV_EFFICIENCY_KWH_PER_MILE * GASOLINE_EFFICIENCY_MPG;
                 odometerElectric.update(eGallon);
             } else {
                 console.log("Failed to retrieve data for USA eGallon calculation.");
@@ -194,7 +194,7 @@
 
             if (gasolinePrice !== null && electricityPrice !== null) {
                 odometerGas.update(gasolinePrice);
-                const eGallon = (electricityPrice * EV_EFFICIENCY_KWH_PER_100_MILES) / GASOLINE_EFFICIENCY_MPG;
+                const eGallon = electricityPrice * EV_EFFICIENCY_KWH_PER_MILE * GASOLINE_EFFICIENCY_MPG;
                 odometerElectric.update(eGallon);
             } else {
                 console.log("Failed to retrieve data for CO eGallon calculation.");
